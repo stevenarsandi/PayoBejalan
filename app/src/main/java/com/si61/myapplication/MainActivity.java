@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fabTambah;
     private RecyclerView rvDestinasi;
-    private ArrayList<String> arrNama, arrAlamat, arrJam;
+    private ArrayList<String> arrId ,arrNama, arrAlamat, arrJam;
     private AdapterDestinasi adDestinasi;
     MyDatabaseHelper myDB;
 
@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             while (varCursor.moveToNext()){
+                arrId.add((varCursor.getString(0)));
                 arrNama.add(varCursor.getString(1));
                 arrAlamat.add(varCursor.getString(2));
                 arrJam.add(varCursor.getString(3));
@@ -58,9 +59,10 @@ public class MainActivity extends AppCompatActivity {
         arrNama = new ArrayList<>();
         arrAlamat = new ArrayList<>();
         arrJam = new ArrayList<>();
+        arrId = new ArrayList<>();
 
         SQLiteToArrayList();
-        adDestinasi = new AdapterDestinasi(MainActivity.this, arrNama, arrAlamat, arrJam);
+        adDestinasi = new AdapterDestinasi(MainActivity.this, arrId,arrNama, arrAlamat, arrJam);
         rvDestinasi.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         rvDestinasi.setAdapter(adDestinasi);
     }
